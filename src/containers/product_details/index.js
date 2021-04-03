@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import {
-  Container,
   CircularProgress,
   Card,
   CardMedia,
@@ -11,6 +10,7 @@ import {
   Typography,
   CardActions,
   Button,
+  Container,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -27,6 +27,10 @@ const ProductDetail = () => {
   const { selectedProduct } = useSelector((state) => state.productStore);
   const classes = useStyles();
   const params = useParams();
+  const history = useHistory();
+  const routePage = (url) => {
+    history.push(url);
+  };
   const [loading, setLoading] = useState(true);
   let { id } = params;
   useEffect(() => {
@@ -55,6 +59,7 @@ const ProductDetail = () => {
   };
   return (
     <Container>
+      <Button onClick={() => routePage("/")}>Go back</Button>
       {loading && (
         <CircularProgress style={{ marginLeft: "50%", marginTop: "30%" }} />
       )}

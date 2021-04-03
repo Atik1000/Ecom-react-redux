@@ -15,7 +15,7 @@ const Navigation = () => {
         <Toolbar>
           <Grid container justify="flex-start">
             <Grid item>
-              <MenuItem onClick={() => routePage("/")}> Home</MenuItem>
+              <MenuItem onClick={() => routePage("/")}> Ecom</MenuItem>
             </Grid>
 
             <Grid item>

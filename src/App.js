@@ -6,7 +6,7 @@ import {
   Redirect,
 } from "react-router-dom";
 import Layout from "../src/components/layout";
-import Product from "../src/containers/product";
+import Product from "./containers/Home";
 import NotFound from "../src/containers/not_found";
 import Cart from "../src/containers/cart";
 import ProductDetail from "../src/containers/product_details";
