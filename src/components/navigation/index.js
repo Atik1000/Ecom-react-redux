@@ -15,21 +15,27 @@ const Navigation = () => {
         <Toolbar>
           <Grid container justify="flex-start">
             <Grid item>
-              <MenuItem onClick={() => routePage("/")}> Ecom</MenuItem>
+              <MenuItem onClick={() => routePage("/")}> FakeEcom</MenuItem>
             </Grid>
 
-            <Grid item>
-              <MenuItem onClick={() => routePage("/cart")}>Cart</MenuItem>
-            </Grid>
-        
+            <Grid item></Grid>
+            <input
+              type="text"
+              placeholder="serch product"
+              style={{ width: "300px" }}
+            />
           </Grid>
 
           <Grid container justify="flex-end">
             <Grid item>
-              <MenuItem onClick={() => routePage("/")}>
-                Total Item:{count}
+              <MenuItem onClick={() => routePage("/cart")}>
+                <img
+                  style={{ height: "30px", width: "30px" }}
+                  src="https://image.flaticon.com/icons/png/512/126/126083.png"
+                  alt=""
+                />
+                <span style={{ color: "black" }}>{count}</span>
               </MenuItem>
-              
             </Grid>
             <Grid item>
               <MenuItem onClick={() => routePage("/Sign in")}>Sign in</MenuItem>
