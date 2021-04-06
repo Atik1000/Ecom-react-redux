@@ -22,7 +22,7 @@ const Navigation = () => {
             <input
               type="text"
               placeholder="serch product"
-              style={{ width: "300px" }}
+              style={{ width: "300px",borderRadius:'10px' }}
             />
           </Grid>
 

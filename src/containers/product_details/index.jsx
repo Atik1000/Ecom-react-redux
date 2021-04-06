@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useHistory, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import {
@@ -12,8 +12,8 @@ import {
   Container,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-
 import { storeSingleProduct } from "../../store/action/productAction";
+import { setLoader } from "../../store/action/loaderAction";
 import Loading from "../../components/loader";
 const useStyles = makeStyles({
   root: {
@@ -25,20 +25,17 @@ const ProductDetail = () => {
   const { count, productList } = useSelector((state) => state.cartStore);
   const dispatch = useDispatch();
   const { selectedProduct } = useSelector((state) => state.productStore);
-  
+  const { loading } = useSelector((state) => state.loaderStore);
   const classes = useStyles();
   const params = useParams();
-
-
-  const [loading, setLoading] = useState(true);
   let { id } = params;
   useEffect(() => {
+    dispatch(setLoader(true));
     async function getData() {
       try {
         const { data } = await axios.get(`http://54.162.199.74/products/${id}`);
-
         dispatch(storeSingleProduct(data));
-        setLoading(false);
+        dispatch(setLoader(false));
       } catch (e) {
         console.log(e);
       }
@@ -66,7 +63,11 @@ const ProductDetail = () => {
         </div>
       ) : (
         <Container>
-          <Link to="/" className="btn btn-light my-3" style={{textDecoration:'none'}}>
+          <Link
+            to="/"
+            className="btn btn-light my-3"
+            style={{ textDecoration: "none" }}
+          >
             Go Back
           </Link>
           {selectedProduct.hasOwnProperty("title") && (

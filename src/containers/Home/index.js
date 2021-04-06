@@ -9,7 +9,6 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import axios from "axios";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { storeAllProduct } from "../../store/action/productAction";
