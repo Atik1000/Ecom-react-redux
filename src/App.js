@@ -11,7 +11,7 @@ import Product from "./containers/Home";
 import NotFound from "../src/containers/not_found";
 import Cart from "../src/containers/cart";
 import ProductDetail from "../src/containers/product_details";
-
+import Register from "./components/auth"
 function App() {
   return (
     <Router>
@@ -25,6 +25,9 @@ function App() {
           </Route>
           <Route exact path={"/cart"}>
             <Cart />
+          </Route>
+          <Route exact path={"/Signin"}>
+            <Register/>
           </Route>
           <Route exact path={"/404"}>
             <NotFound />

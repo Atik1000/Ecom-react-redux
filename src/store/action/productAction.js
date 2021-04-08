@@ -4,7 +4,7 @@ import {setLoader} from './loaderAction';
 
 export const storeAllProduct = () => async (dispatch, getState) => {
     dispatch(setLoader(true))
-  const allProducts = await axios.get(`http://54.162.199.74/products/`)
+  const allProducts = await axios.get(`http://127.0.0.1:8080/products/`)
 
   dispatch(storeProducts(allProducts.data))
   dispatch(setLoader(false))

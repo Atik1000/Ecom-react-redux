@@ -33,7 +33,7 @@ const ProductDetail = () => {
     dispatch(setLoader(true));
     async function getData() {
       try {
-        const { data } = await axios.get(`http://54.162.199.74/products/${id}`);
+        const { data } = await axios.get(`http://127.0.0.1:8080/products/${id}`);
         dispatch(storeSingleProduct(data));
         dispatch(setLoader(false));
       } catch (e) {
@@ -78,7 +78,7 @@ const ProductDetail = () => {
                 height="400"
                 image={selectedProduct.image}
                 title={selectedProduct.title}
-              />
+              /> 
               <CardContent>
                 <Typography gutterBottom variant="h5" component="h2">
                   {selectedProduct.title}

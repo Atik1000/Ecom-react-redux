@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
   Container,
   Grid,
@@ -13,7 +13,6 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { storeAllProduct } from "../../store/action/productAction";
 import Loading from "../../components/loader";
-
 const useStyles = makeStyles({
   root: {
     height: "100%",
@@ -30,12 +29,8 @@ const Product = () => {
   const dispatch = useDispatch();
   const { productList } = useSelector((state) => state.productStore);
   const { loading } = useSelector((state) => state.loaderStore);
-
   const classes = useStyles();
   const history = useHistory();
-
- 
-
   useEffect(() => {
     dispatch(storeAllProduct());
   
