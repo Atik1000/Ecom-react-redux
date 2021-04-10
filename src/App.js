@@ -13,6 +13,8 @@ import Cart from "../src/containers/cart";
 import ProductDetail from "../src/containers/product_details";
 import Login from "../src/components/auth/LoginForm"
 import SignUp from "../src/components/auth/SignUp"
+import PrivateRoute from "./PrivateRoute";
+import Admin from '../src/admin'
 function App() {
   return (
     <Router>
@@ -33,12 +35,17 @@ function App() {
           <Route exact path={"/login"}>
             <Login/>
           </Route>
+          <PrivateRoute exact path={"/admin"}>
+            <Admin/>
+
+          </PrivateRoute>
           <Route exact path={"/404"}>
             <NotFound />
           </Route>
           <Route exact path={"*"}>
             <Redirect to={"/404"}></Redirect>
           </Route>
+        
         </Switch>
       </Layout>
     </Router>
