@@ -10,8 +10,8 @@ export const storeAllProduct=()=>async(dispatch,getState)=>{
 }
 export const storeSingleProduct=(id)=>async(dispatch,getState)=>{
   dispatch(setLoader(true));
-   let {data}=await axios.get(`http://127.0.0.1:8080/products/${id}`)
-  // let {data}=await axios.get(`http://54.162.199.74/products/${id}`)
+  //  let {data}=await axios.get(`http://127.0.0.1:8080/products/${id}`)
+  let {data}=await axios.get(`http://54.162.199.74/products/${id}`)
   dispatch(storeProduct(data));
   dispatch(setLoader(false));
 }

@@ -34,6 +34,7 @@ const SignUp = () => {
   const classes = useStyles();
 
   return (
+ 
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
@@ -110,6 +111,7 @@ const SignUp = () => {
       </div>
       <Box mt={5}></Box>
     </Container>
+
   );
 };
 

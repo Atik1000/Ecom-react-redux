@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   Card,
@@ -13,7 +12,6 @@ import {
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { storeSingleProduct } from "../../store/action/productAction";
-import { setLoader } from "../../store/action/loaderAction";
 import Loading from "../../components/loader";
 const useStyles = makeStyles({
   root: {

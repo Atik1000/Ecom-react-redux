@@ -15,6 +15,7 @@ import Login from "../src/components/auth/LoginForm"
 import SignUp from "../src/components/auth/SignUp"
 import PrivateRoute from "./PrivateRoute";
 import Admin from '../src/admin'
+
 function App() {
   return (
     <Router>
