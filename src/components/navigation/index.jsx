@@ -38,7 +38,7 @@ const Navigation = () => {
               </MenuItem>
             </Grid>
             <Grid item>
-              <MenuItem onClick={() => routePage("/Signin")}>Sign in</MenuItem>
+              <MenuItem onClick={() => routePage("/Login")}>Login</MenuItem>
             </Grid>
           </Grid>
         </Toolbar>

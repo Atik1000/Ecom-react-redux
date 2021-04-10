@@ -2,24 +2,32 @@ import { ActionTypes } from "../types";
 import axios from "axios";
 import {setLoader} from './loaderAction';
 
-export const storeAllProduct = () => async (dispatch, getState) => {
-    dispatch(setLoader(true))
-  const allProducts = await axios.get(`http://127.0.0.1:8080/products/`)
+export const storeAllProduct=()=>async(dispatch,getState)=>{
+  dispatch(setLoader(true));
+  let {data}=await axios.get('http://54.162.199.74/products')
 
-  dispatch(storeProducts(allProducts.data))
-  dispatch(setLoader(false))
-};
+  dispatch(storeProductList(data));
+  dispatch(setLoader(false));
+}
 
-export const storeSingleProduct = (data) => {
+export const storeSingleProduct=(id)=>async(dispatch,getState)=>{
+  dispatch(setLoader(true));
+  // let {data}=await axios.get(`http://127.0.0.1:8080/products/${id}`)
+  let {data}=await axios.get(`http://54.162.199.74/products/${id}`)
+  dispatch(storeProduct(data));
+  dispatch(setLoader(false));
+}
+
+const storeProductList=(data)=>{
   return {
-    type: ActionTypes.SELECTED_PRODUCT,
-    payload: data,
-  };
-};
+      type:ActionTypes.STORE_ALL_PRODUCT,
+      payload:data
+  }
+}
 
-const storeProducts = (data) => {
+const storeProduct=(data)=>{
   return {
-    type: ActionTypes.STORE_ALL_PRODUCT,
-    payload: data,
-  };
-};
+      type:ActionTypes.SELECTED_PRODUCT,
+      payload:data
+  }
+}

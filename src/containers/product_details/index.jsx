@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
@@ -30,18 +30,8 @@ const ProductDetail = () => {
   const params = useParams();
   let { id } = params;
   useEffect(() => {
-    dispatch(setLoader(true));
-    async function getData() {
-      try {
-        const { data } = await axios.get(`http://127.0.0.1:8080/products/${id}`);
-        dispatch(storeSingleProduct(data));
-        dispatch(setLoader(false));
-      } catch (e) {
-        console.log(e);
-      }
-    }
-    getData();
-  }, []);
+ dispatch(storeSingleProduct(id))
+  }, [id]);
 
   const addToCart = () => {
     dispatch({
