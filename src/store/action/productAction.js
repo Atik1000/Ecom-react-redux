@@ -15,14 +15,12 @@ export const storeSingleProduct=(id)=>async(dispatch,getState)=>{
   dispatch(storeProduct(data));
   dispatch(setLoader(false));
 }
-
 const storeProductList=(data)=>{
   return {
       type:ActionTypes.STORE_ALL_PRODUCT,
       payload:data
   }
 }
-
 const storeProduct=(data)=>{
   return {
       type:ActionTypes.SELECTED_PRODUCT,
