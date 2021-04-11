@@ -13,7 +13,7 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-import { MDBContainer, MDBRow, MDBCol,  MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
+// import { MDBContainer, MDBRow, MDBCol,  MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -94,7 +94,7 @@ const LogIn = () => {
                 <strong>or</strong> login with :
               </h6>
             </Grid>
-            <div className="row my-3 d-flex justify-content-center">
+            {/* <div className="row my-3 d-flex justify-content-center">
                 <MDBBtn
                   type="button"
                   color="white"
@@ -112,7 +112,7 @@ const LogIn = () => {
                  <i className='fa fa-facebook'></i>
                 </MDBBtn>
                
-              </div>
+              </div> */}
 
             <Grid container justify="flex-end">
               <Grid item>
