@@ -70,7 +70,7 @@ const Product = () => {
                           </Typography>
                           <br />
                           <Typography variant="subtitle1" color="primary">
-                            Price: ${product.price}
+                            Price: ${product.price} 
                           </Typography>
                         </CardContent>
                       </CardActionArea>

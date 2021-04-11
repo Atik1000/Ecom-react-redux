@@ -13,7 +13,6 @@ import {
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
 
-// import { MDBContainer, MDBRow, MDBCol,  MDBCardBody, MDBInput, MDBBtn, MDBIcon, MDBModalFooter } from 'mdbreact';
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
