@@ -2,7 +2,7 @@ import React from 'react';
 import {Route,Redirect} from 'react-router-dom';
 
 const PrivateRoute = ({children,...rest}) => {
-    const isauth =false
+    const isauth =true
     return (
         <Route {...rest} render={()=>isauth?(children):(<Redirect to={'/'}/>)}/>
             

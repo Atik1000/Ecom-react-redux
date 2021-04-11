@@ -8,6 +8,8 @@
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.1",
+    "formik": "^2.2.6",
+    "mdbreact": "^5.0.2",
     "node-sass": "^5.0.0",
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
@@ -19,7 +21,8 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.3",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "yap": "^0.0.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -9,6 +9,7 @@ import {
   makeStyles,
   Button,
   TextField,
+  Card
 } from "@material-ui/core";
 import { Link as RouteLink } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
@@ -36,6 +37,16 @@ const SignUp = () => {
   return (
  
     <Container component="main" maxWidth="xs">
+       <Card
+        style={{
+          boxShadow:
+            "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",
+          paddingLeft: "50px",
+          paddingRight: "50px",
+          marginTop: "30px",
+          paddingBottom: "30px",
+        }}
+      >
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}></Avatar>
@@ -110,6 +121,7 @@ const SignUp = () => {
         </form>
       </div>
       <Box mt={5}></Box>
+      </Card>
     </Container>
 
   );
