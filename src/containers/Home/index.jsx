@@ -8,6 +8,7 @@ import {
   CardContent,
   Typography,
 } from "@material-ui/core";
+import Carusel from "../Carusel"
 import { makeStyles } from "@material-ui/core/styles";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -48,6 +49,7 @@ const Product = () => {
         </div>
       ) : (
         <Container>
+          {/* <Carusel/> */}
           <Grid container spacing={2} style={{ marginTop: "10px" }}>
             {productList &&
               productList.map((product, index) => {

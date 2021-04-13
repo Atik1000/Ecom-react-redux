@@ -10,9 +10,9 @@ import Layout from "../src/components/layout";
 import Product from "./containers/Home";
 import NotFound from "../src/containers/not_found";
 import Cart from "../src/containers/cart";
-import ProductDetail from "../src/containers/product_details";
-import Login from "../src/components/auth/LoginForm";
-import SignUp from "../src/components/auth/SignUp";
+import ProductDetail from "../src/containers/Product";
+import Login from "./containers/auth/Login/LoginForm";
+import SignUp from "./containers/auth/Signin/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import Admin from "../src/admin";
 
@@ -37,7 +37,7 @@ function App() {
             <Login />
           </Route>
           <PrivateRoute exact path={"/admin"}>
-            <Admin />
+          <Admin /> 
           </PrivateRoute>
           <Route exact path={"/404"}>
             <NotFound />

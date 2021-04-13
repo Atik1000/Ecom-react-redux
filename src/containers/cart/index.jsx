@@ -9,7 +9,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { Button } from "reactstrap";
 
 const useStyles = makeStyles({
   root: {
@@ -24,9 +25,31 @@ const useStyles = makeStyles({
 });
 
 const Product = () => {
-  const { productList } = useSelector((state) => state.cartStore);
-  const classes = useStyles();
 
+  const classes = useStyles();
+  const {count,productList}=useSelector((state)=>state.cartStore)
+  const {selectedProduct}=useSelector((state)=>state.productStore)
+  const dispatch=useDispatch()
+
+ const removeCart=()=>{
+  dispatch({
+      type:'ADD_TO_CART',
+      payload:{
+          count:count? count-1 :0,
+          productList:productList?productList.concat(selectedProduct) :[...selectedProduct]
+      }
+  })
+}
+
+//  const removeItemFromCart = (cartItems, cartItemToRemove) => {
+//   const existingCartItem = cartItems.find(
+//     cartItem => cartItem.id === cartItemToRemove.id
+//   );
+
+//   if (existingCartItem.quantity === 1) {
+//     return cartItems.filter(cartItem => cartItem.id !== cartItemToRemove.id);
+//   }
+// }
   return (
     <Container>
       <Grid container spacing={2} style={{ marginTop: "10px" }}>
@@ -53,6 +76,10 @@ const Product = () => {
                       <Typography variant="subtitle1" color="primary">
                         Price: ${product.price}
                       </Typography>
+                      <Button className='btn-danger' onClick={removeCart}>
+                        Remove
+                      </Button>
+                      
                     </CardContent>
                   </CardActionArea>
                 </Card>
