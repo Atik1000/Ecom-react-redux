@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Button, Container } from "@material-ui/core";
 import { Col, Row, CardImg, ListGroup, ListGroupItem } from "reactstrap";
+import axios from "axios";
+import  {useHistory} from 'react-router-dom'
 import { useSelector, useDispatch } from "react-redux";
 import { storeSingleProduct } from "../../store/action/productAction";
 import Loading from "../../components/loader";
@@ -17,24 +19,49 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const { selectedProduct } = useSelector((state) => state.productStore);
   const { loading } = useSelector((state) => state.loaderStore);
-  const classes = useStyles();
+  const history=useHistory()
   const params = useParams();
+  const [open, setOpen] =useState(false);
+  const [msg, setMsg] =useState('');
   let { id } = params;
   useEffect(() => {
     dispatch(storeSingleProduct(id));
   }, [id]);
 
-  const addToCart = () => {
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: {
-        count: count ? count + 1 : 1,
-        productList: productList
-          ? productList.concat(selectedProduct)
-          : [...selectedProduct],
-      },
-    });
-  };
+  const addToCart=()=>{
+    let user=JSON.parse(sessionStorage.getItem('jwtToken'));
+    if(!user){
+        history.push('/login')
+    }else{
+        let token=user.token
+        dispatch({
+            type:'ADD_TO_CART',
+            payload:{
+                count:count? count+1 :1,
+                productList:productList?productList.concat(selectedProduct) :[...selectedProduct]
+            }
+        })
+        axios.post('http://127.0.0.1:8080/cart',{
+            product:{
+                id: selectedProduct._id,
+                quantity : 1
+            },
+        },{
+            headers: {
+            'authorization': `bearer ${token}` 
+            }
+        }).then((res)=>{
+            setMsg('Product added to cart.');
+            setOpen(true);
+            
+        }).catch((e)=>{
+           setMsg(e.response.data.error);
+        setOpen(true);
+        })
+        
+    }
+    
+}
 
   return (
     <>

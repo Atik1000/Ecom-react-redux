@@ -14,6 +14,7 @@ import ProductDetail from "../src/containers/Product";
 import Login from "./containers/auth/Login/LoginForm";
 import SignUp from "./containers/auth/Signin/SignUp";
 import PrivateRoute from "./PrivateRoute";
+import PublicRoute from "./PublicRoute";
 import Admin from "../src/admin";
 
 function App() {
@@ -30,12 +31,9 @@ function App() {
           <Route exact path={"/cart"}>
             <Cart />
           </Route>
-          <Route exact path={"/signup"}>
-            <SignUp />
-          </Route>
-          <Route exact path={"/login"}>
-            <Login />
-          </Route>
+
+            <PublicRoute restricted={true} component={Login} path="/login" exact />
+            <PublicRoute restricted={true} component={SignUp} path="/signup" exact />
           <PrivateRoute exact path={"/admin"}>
           <Admin /> 
           </PrivateRoute>

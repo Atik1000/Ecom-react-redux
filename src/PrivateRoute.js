@@ -1,15 +1,22 @@
-import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import React from 'react';
+import {Redirect,Route} from 'react-router-dom';
 
-const PrivateRoute = ({ children, ...rest }) => {
-  const isauth = true;
-  return (
-    <Route
-      {...rest}
-      render={() => (isauth ? children : <Redirect to={"/"} />)}
-    />
-  );
+const PrivateRoute = ({component: Component, ...rest}) => {
+    let isAuth;
+    let userInfo=JSON.parse(sessionStorage.getItem('jwtToken'));
+    if(userInfo){
+        isAuth=true
+    }else{
+        isAuth=false
+    }
+    return (
+
+        <Route {...rest} render={props => (
+            isAuth ?
+                <Component {...props} />
+            : <Redirect to="/login" />
+        )} />
+    );
 };
 
 export default PrivateRoute;
-

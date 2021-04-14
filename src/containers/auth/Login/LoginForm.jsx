@@ -1,16 +1,16 @@
-import React, { useReducer, useState } from "react";
+import React, {useState } from "react";
 import { BASE_URL } from "../../../static";
 import {
   Avatar,
   CssBaseline,
   Typography,
   Container,
-  Box,
   Grid,
   makeStyles,
   Button,
   Collapse,
   IconButton,
+  Card
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
@@ -60,7 +60,7 @@ const LogIn = () => {
           sessionStorage.setItem("jwtToken", JSON.stringify(res.data.userInfo));
           history.push("/");
         } else {
-          setMsg("User not found");
+          setMsg("not found");
           setOpen(true);
         }
       })
@@ -71,89 +71,105 @@ const LogIn = () => {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <Collapse in={open}>
-        <Alert
-          severity="error"
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          }
-        >
-          {msg}
-        </Alert>
-      </Collapse>
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}></Avatar>
-        <Typography component="h1" variant="h5">
-          Log in
-        </Typography>
-        <ValidatorForm onSubmit={submitForm}>
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
-              <TextValidator
-                variant="outlined"
-                value={formInput.email}
-                fullWidth
-                required
-                id="email"
-                label="Email Address"
-                name="email"
-                onChange={(e) =>
-                  setFormInput((state) => ({
-                    ...state,
-                    email: e.target.value,
-                  }))
-                }
-                validators={["required", "isEmail"]}
-                errorMessages={["this field is required", "email is not valid"]}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <TextValidator
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={(e) =>
-                  setFormInput((state) => ({
-                    ...state,
-                    password: e.target.value,
-                  }))
-                }
-              />
-            </Grid>
-          </Grid>
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
+      <Card
+        style={{
+          width: "500px",
+          boxShadow:
+            "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",
+          paddingLeft: "50px",
+          paddingRight: "50px",
+          marginTop: "30px",
+          paddingBottom: "30px",
+        }}
+      >
+        <CssBaseline />
+        <Collapse in={open}>
+          <Alert
+            severity="error"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
           >
-            Log In
-          </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-              <RouteLink to="/signup">Don't have an account? Sign up</RouteLink>
+            {msg}
+          </Alert>
+        </Collapse>
+        <div className={classes.paper}>
+          <Avatar className={classes.avatar}></Avatar>
+          <Typography component="h1" variant="h5">
+            Log in
+          </Typography>
+          <ValidatorForm onSubmit={submitForm}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <TextValidator
+                  variant="outlined"
+                  value={formInput.email}
+                  fullWidth
+                  required
+                  id="email"
+                  label="Email Address"
+                  name="email"
+                  onChange={(e) =>
+                    setFormInput((state) => ({
+                      ...state,
+                      email: e.target.value,
+                    }))
+                  }
+                  validators={["required", "isEmail"]}
+                  errorMessages={[
+                    "this field is required",
+                    "email is not valid",
+                  ]}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
+                <TextValidator
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="password"
+                  label="Password"
+                  type="password"
+                  id="password"
+                  autoComplete="current-password"
+                  onChange={(e) =>
+                    setFormInput((state) => ({
+                      ...state,
+                      password: e.target.value,
+                    }))
+                  }
+                />
+              </Grid>
             </Grid>
-          </Grid>
-        </ValidatorForm>
-      </div>
-      <Box mt={5}></Box>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Log In
+            </Button>
+            <Grid container justify="flex-end">
+              <Grid item>
+                <RouteLink to="/signup">
+                  Don't have an account? Sign up
+                </RouteLink>
+              </Grid>
+            </Grid>
+          </ValidatorForm>
+        </div>
+      </Card>
     </Container>
   );
 };
