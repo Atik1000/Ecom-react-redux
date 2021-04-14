@@ -1,4 +1,4 @@
-import React, { useReducer} from "react";
+import React, { useReducer,useState} from "react";
 import {BASE_URL} from "../../../static";
 import {
   Avatar,
@@ -51,6 +51,7 @@ const SignUp = () => {
       phone: "",
     }
   );
+
   const submitForm = (e) => {
     e.preventDefault();
     axios
@@ -72,7 +73,7 @@ const SignUp = () => {
         history.push("/login");
       })
       .catch((e)=>{
-        console.log(e.response.data);
+        console.log(e.response);
   
       });
   };
