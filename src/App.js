@@ -31,12 +31,19 @@ function App() {
           <Route exact path={"/cart"}>
             <Cart />
           </Route>
-
-            <PublicRoute restricted={true} component={Login} path="/login" exact />
-            <PublicRoute restricted={true} component={SignUp} path="/signup" exact />
-          <PrivateRoute exact path={"/admin"}>
-          <Admin /> 
-          </PrivateRoute>
+          <PublicRoute
+            restricted={true}
+            component={Login}
+            path="/login"
+            exact
+          />
+          <PublicRoute
+            restricted={true}
+            component={SignUp}
+            path="/signup"
+            exact
+          />
+          <PrivateRoute component={Admin} exact path={"/admin"} />
           <Route exact path={"/404"}>
             <NotFound />
           </Route>
