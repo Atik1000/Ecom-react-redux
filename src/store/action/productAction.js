@@ -1,17 +1,18 @@
 import { ActionTypes } from "../types";
 import axios from "axios";
 import {setLoader} from './loaderAction';
+import { BASE_URL } from "../../static";
+
 
 export const storeAllProduct=()=>async(dispatch,getState)=>{
   dispatch(setLoader(true));
-  let {data}=await axios.get('http://54.162.199.74/products')
+  let {data}=await axios.get(`${BASE_URL}/products`)
   dispatch(storeProductList(data));
   dispatch(setLoader(false));
 }
-export const storeSingleProduct=(id)=>async(dispatch,getState)=>{
+export const storeSingleProduct=(_id)=>async(dispatch,getState)=>{
   dispatch(setLoader(true));
-    // let {data}=await axios.get(`http://127.0.0.1:8080/products/${id}`)
-  let {data}=await axios.get(`http://54.162.199.74/products/${id}`)
+   let {data}=await axios.get(`${BASE_URL}/products/${_id}`)
   dispatch(storeProduct(data));
   dispatch(setLoader(false));
 }

@@ -1,0 +1,264 @@
+import React, { useReducer, useEffect, useState } from "react";
+import {
+  CssBaseline,
+  Typography,
+  Container,
+  Box,
+  Grid,
+  makeStyles,
+  Button,
+  Collapse,
+  IconButton,
+  MenuItem,
+  Select,
+  InputLabel,
+} from "@material-ui/core";
+import Alert from "@material-ui/lab/Alert";
+import CloseIcon from "@material-ui/icons/Close";
+import { Link } from "react-router-dom";
+import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
+import { BASE_URL } from "../../static";
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+  },
+  form: {
+    width: "100%",
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
+
+const ProductForm = () => {
+  const classes = useStyles();
+  const [open, setOpen] = useState(false);
+  const [succes, setSuccess] = useState(false);
+  const [msg, setMsg] = useState("");
+  const [option, setOption] = useState([]);
+
+  const [formInput, setFormInput] = useReducer(
+    (state, newState) => ({ ...state, ...newState }),
+    {
+      title: "",
+      price: "",
+      description: "",
+      stock: "",
+      category: "",
+      image: "",
+    }
+  );
+  const handleInput = (evt) => {
+    const name = evt.target.name;
+    const newValue = evt.target.value;
+    setFormInput({ [name]: newValue });
+  };
+
+  const convertImage = (e) => {
+    const name = e.target.name;
+    getBase64(e.target.files[0]).then((result) => {
+      setFormInput({ [name]: result });
+    });
+  };
+  useEffect(() => {
+    axios.get(`${BASE_URL}/category`).then((res) => {
+      const data = res.data.map((obj) => {
+        return (
+          <li value={obj._id} key={obj._id}>
+            {obj.name}
+          </li>
+        );
+      });
+      setOption(data);
+    });
+  }, []);
+
+  const getBase64 = (file) => {
+    return new Promise((resolve) => {
+      let baseURL = "";
+      let reader = new FileReader();
+
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        baseURL = reader.result;
+        resolve(baseURL);
+      };
+    });
+  };
+
+  const submitForm = (evt) => {
+    evt.preventDefault();
+    let user = JSON.parse(sessionStorage.getItem("jwtToken"));
+    let token = user.token;
+    console.log(formInput);
+    axios
+      .post(
+        `${BASE_URL}/products`,
+        {
+          title: formInput.title,
+          price: parseFloat(formInput.price),
+          description: formInput.description,
+          image: formInput.image,
+          stock: formInput.stock,
+          category: {
+            _id: formInput.category,
+          },
+        },
+        {
+          headers: {
+            authorization: `bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        setMsg("Product added successfully.");
+        setOpen(true);
+        setSuccess(true);
+      })
+      .catch((e) => {
+        setMsg(e.response.data.error);
+        setOpen(true);
+        setSuccess(false);
+      });
+  };
+
+  return (
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Collapse in={open}>
+        {succes ? (
+          <Alert
+            severity="success"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+          >
+            {msg}
+          </Alert>
+        ) : (
+          <Alert
+            severity="error"
+            action={
+              <IconButton
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  setOpen(false);
+                }}
+              >
+                <CloseIcon fontSize="inherit" />
+              </IconButton>
+            }
+          >
+            {msg}
+          </Alert>
+        )}
+      </Collapse>
+      <div className={classes.paper}>
+        <Typography component="h1" variant="h5">
+          Add new product
+        </Typography>
+        <ValidatorForm onSubmit={submitForm}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextValidator
+                variant="outlined"
+                value={formInput.title}
+                fullWidth
+                required
+                label="Product title"
+                name="title"
+                onChange={handleInput}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextValidator
+                variant="outlined"
+                value={formInput.price}
+                fullWidth
+                required
+                label="Product price"
+                name="price"
+                type="number"
+                onChange={handleInput}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextValidator
+                variant="outlined"
+                value={formInput.description}
+                fullWidth
+                required
+                label="Product description"
+                name="description"
+                onChange={handleInput}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextValidator
+                variant="outlined"
+                value={formInput.stock}
+                fullWidth
+                required
+                label="Product stock"
+                name="stock"
+                type="number"
+                onChange={handleInput}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <InputLabel id="categorylabel">Category</InputLabel>
+              <Select
+                labelId="categorylabel"
+                id="category"
+                name="category"
+                value={formInput.category}
+                fullWidth
+                onChange={handleInput}
+              >
+                {option}
+              </Select>
+            </Grid>
+            <Grid item xs={12}>
+              <input
+                type="file"
+                name="image"
+                required
+                onChange={convertImage}
+              />
+            </Grid>
+          </Grid>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+          >
+            Add Product
+          </Button>
+        </ValidatorForm>
+      </div>
+      <Box mt={5}></Box>
+    </Container>
+  );
+};
+
+export default ProductForm;

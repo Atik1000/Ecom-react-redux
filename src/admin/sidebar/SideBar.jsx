@@ -1,3 +1,4 @@
+import { Link } from '@material-ui/core';
 import React from 'react';
 import './SideBar.scss';
 
@@ -19,11 +20,11 @@ const SideBar = ({sidebarOpen,openSidebar,closeSidebar}) => {
                 <h2>MNG</h2>
                 <div className="sidebar_link">
                     <i className='fa fa-user-secret'></i>
-                    <a href="#">Admin Manager</a>
+                    <Link href="/add-category">Add category</Link>
                 </div>
                 <div className="sidebar_link">
                     <i className='fa fa-building-o'></i>
-                    <a href="#">company Manager</a>
+                    <Link href="/add-product">Add Product</Link>
                 </div>
                 <div className="sidebar_link">
                     <i className='fa fa-archive'></i>

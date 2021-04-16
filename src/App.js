@@ -16,6 +16,8 @@ import SignUp from "./containers/auth/Signin/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import Admin from "../src/admin";
+import Category from "../src/admin/Category"
+import ProductForm from "./admin/ProductForm";
 
 function App() {
   return (
@@ -44,6 +46,8 @@ function App() {
             exact
           />
           <PrivateRoute component={Admin} exact path={"/admin"} />
+          <PrivateRoute component={Category} exact path={"/add-category"} />
+          <PrivateRoute component={ProductForm} exact path={"/add-product"} />
           <Route exact path={"/404"}>
             <NotFound />
           </Route>

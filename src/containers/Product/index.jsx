@@ -1,13 +1,14 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card, Button, Container } from "@material-ui/core";
 import { Col, Row, CardImg, ListGroup, ListGroupItem } from "reactstrap";
 import axios from "axios";
-import  {useHistory} from 'react-router-dom'
+import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { storeSingleProduct } from "../../store/action/productAction";
 import Loading from "../../components/loader";
+import { BASE_URL } from "../../static";
 const useStyles = makeStyles({
   root: {
     marginTop: 20,
@@ -19,49 +20,55 @@ const ProductDetail = () => {
   const dispatch = useDispatch();
   const { selectedProduct } = useSelector((state) => state.productStore);
   const { loading } = useSelector((state) => state.loaderStore);
-  const history=useHistory()
+  const history = useHistory();
   const params = useParams();
-  const [open, setOpen] =useState(false);
-  const [msg, setMsg] =useState('');
-  let { id } = params;
+  const [open, setOpen] = useState(false);
+  const [msg, setMsg] = useState("");
+  let { _id } = params;
   useEffect(() => {
-    dispatch(storeSingleProduct(id));
-  }, [id]);
+    dispatch(storeSingleProduct(_id));
+  }, [_id]);
 
-  const addToCart=()=>{
-    let user=JSON.parse(sessionStorage.getItem('jwtToken'));
-    if(!user){
-        history.push('/login')
-    }else{
-        let token=user.token
-        dispatch({
-            type:'ADD_TO_CART',
-            payload:{
-                count:count? count+1 :1,
-                productList:productList?productList.concat(selectedProduct) :[...selectedProduct]
-            }
-        })
-        axios.post('http://127.0.0.1:8080/cart',{
-            product:{
-                id: selectedProduct._id,
-                quantity : 1
+  const addToCart = () => {
+    let user = JSON.parse(sessionStorage.getItem("jwtToken"));
+    if (!user) {
+      history.push("/login");
+    } else {
+      let token = user.token;
+      dispatch({
+        type: "ADD_TO_CART",
+        payload: {
+          count: count ? count + 1 : 1,
+          productList: productList
+            ? productList.concat(selectedProduct)
+            : [...selectedProduct],
+        },
+      });
+      axios
+        .post(
+          `${BASE_URL}/cart`,
+          {
+            product: {
+              id: selectedProduct._id,
+              quantity: 1,
             },
-        },{
+          },
+          {
             headers: {
-            'authorization': `bearer ${token}` 
-            }
-        }).then((res)=>{
-            setMsg('Product added to cart.');
-            setOpen(true);
-            
-        }).catch((e)=>{
-           setMsg(e.response.data.error);
-        setOpen(true);
+              authorization: `bearer ${token}`,
+            },
+          }
+        )
+        .then((res) => {
+          setMsg("Product added to cart.");
+          setOpen(true);
         })
-        
+        .catch((e) => {
+          setMsg(e.response.data.error);
+          setOpen(true);
+        });
     }
-    
-}
+  };
 
   return (
     <>
@@ -79,7 +86,7 @@ const ProductDetail = () => {
               <Card>
                 <CardImg
                   style={{ width: "350px", height: "350px" }}
-                  src={selectedProduct.image}
+                  src={BASE_URL + selectedProduct.image}
                   alt={selectedProduct.name}
                   fluid
                 />
@@ -89,7 +96,6 @@ const ProductDetail = () => {
               <ListGroup variant="flush">
                 <ListGroupItem>{selectedProduct.title}</ListGroupItem>
                 <ListGroupItem>
-                  {" "}
                   selectedProduct : ${selectedProduct.price}
                 </ListGroupItem>
                 <ListGroupItem>
@@ -117,11 +123,14 @@ const ProductDetail = () => {
                   </ListGroupItem>
                 </ListGroup>
                 <ListGroupItem>
-                  <Button  onClick={addToCart}
-                    className="btn-block" variant="contained" color="primary">
+                  <Button
+                    onClick={addToCart}
+                    className="btn-block"
+                    variant="contained"
+                    color="primary"
+                  >
                     Add to Cart
                   </Button>
-                 
                 </ListGroupItem>
               </Card>
             </Col>

@@ -14,6 +14,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { storeAllProduct } from "../../store/action/productAction";
 import Loading from "../../components/loader";
+import { BASE_URL } from "../../static";
 const useStyles = makeStyles({
   root: {
     height: "100%",
@@ -59,7 +60,7 @@ const Product = () => {
                       <CardActionArea onClick={() => handleClick(product.id)}>
                         <CardMedia
                           className={classes.media}
-                          image={product.image}
+                          image={BASE_URL+product.image}
                           title="Contemplative Reptile"
                         />
                         <CardContent>
