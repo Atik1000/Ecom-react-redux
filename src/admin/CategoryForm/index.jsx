@@ -12,10 +12,10 @@ import {
 } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import CloseIcon from "@material-ui/icons/Close";
-
+import {Link} from 'react-router-dom';
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import axios from "axios";
-
+import { BASE_URL } from "../../static";
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(6),
@@ -58,7 +58,7 @@ const CategoryForm = () => {
 
     axios
       .post(
-        "http://127.0.0.1:8080/category",
+        `${BASE_URL}/category`,
         {
           name: formInput.name,
           description: formInput.description,
@@ -83,6 +83,7 @@ const CategoryForm = () => {
   };
   return (
     <Container component="main" maxWidth="xs">
+      <Button><Link to='/admin'>Go Back</Link></Button>
       <CssBaseline />
       <Collapse in={open}>
         {success ? (

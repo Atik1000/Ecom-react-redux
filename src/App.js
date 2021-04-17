@@ -16,7 +16,7 @@ import SignUp from "./containers/auth/Signin/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import Admin from "../src/admin";
-import Category from "../src/admin/Category"
+import Category from "./admin/CategoryForm"
 import ProductForm from "./admin/ProductForm";
 
 function App() {
