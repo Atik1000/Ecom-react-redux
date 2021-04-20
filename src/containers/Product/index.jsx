@@ -24,10 +24,10 @@ const ProductDetail = () => {
   const params = useParams();
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState("");
-  let { _id } = params;
+  let { id } = params;
   useEffect(() => {
-    dispatch(storeSingleProduct(_id));
-  }, [_id]);
+    dispatch(storeSingleProduct(id));
+  }, [id]);
 
   const addToCart = () => {
     let user = JSON.parse(sessionStorage.getItem("jwtToken"));

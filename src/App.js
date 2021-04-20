@@ -16,8 +16,12 @@ import SignUp from "./containers/auth/Signin/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import PublicRoute from "./PublicRoute";
 import Admin from "../src/admin";
-import Category from "./admin/CategoryForm"
-import ProductForm from "./admin/ProductForm";
+import Category from "./admin/AllCategory/CategoryCreate";
+import ProductForm from "./admin/AllProduct//ProductForm";
+import CategoryUpdateForm from "./admin/AllCategory/CategoryUpdate";
+import CategoryDelete from "./admin/AllCategory/DeleteCategory";
+import ProductUpdate from "./admin/AllProduct/ProductUpdate";
+import ProductDelete from "./admin/AllProduct/DeleteProduct";
 
 function App() {
   return (
@@ -45,9 +49,14 @@ function App() {
             path="/signup"
             exact
           />
-          <PrivateRoute component={Admin} exact path={"/admin"} />
+          <PrivateRoute exact path={"/admin"} component={Admin} />
+
           <PrivateRoute component={Category} exact path={"/add-category"} />
+          <PrivateRoute component={CategoryUpdateForm} exact path={"/update-category"} />
+          <PrivateRoute component={CategoryDelete} exact path={"/delete-category"} />
           <PrivateRoute component={ProductForm} exact path={"/add-product"} />
+          <PrivateRoute component={ProductUpdate} exact path={"/update-product"} />
+          <PrivateRoute component={ProductDelete} exact path={"/delete-product"} />
           <Route exact path={"/404"}>
             <NotFound />
           </Route>

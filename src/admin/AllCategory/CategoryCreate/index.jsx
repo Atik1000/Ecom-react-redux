@@ -15,7 +15,7 @@ import CloseIcon from "@material-ui/icons/Close";
 import {Link} from 'react-router-dom';
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import axios from "axios";
-import { BASE_URL } from "../../static";
+import { BASE_URL } from "../../../static";
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(6),

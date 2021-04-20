@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import axios from "axios";
 
-import { BASE_URL } from "../../static";
+import { BASE_URL } from "../../../static";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

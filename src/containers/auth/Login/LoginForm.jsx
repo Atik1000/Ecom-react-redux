@@ -73,7 +73,7 @@ const LogIn = () => {
     <Container component="main" maxWidth="xs">
       <Card
         style={{
-          width: "500px",
+
           boxShadow:
             "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",
           paddingLeft: "50px",
@@ -171,6 +171,8 @@ const LogIn = () => {
         </div>
       </Card>
     </Container>
+
+
   );
 };
 

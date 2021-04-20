@@ -1,8 +1,17 @@
 import { Link } from "react-router-dom";
 import React from "react";
 import "./SideBar.scss";
+import {
+  Dropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+} from "reactstrap";
+import { useState } from "react";
 
 const SideBar = ({ sidebarOpen, openSidebar, closeSidebar }) => {
+  const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
+  const toggle = () => setCategoryDropdownOpen((prevState) => !prevState);
   return (
     <div className={sidebarOpen ? "sidebar-responsive" : ""} id="sidebar">
       <div className="sidebar-title">
@@ -18,8 +27,20 @@ const SideBar = ({ sidebarOpen, openSidebar, closeSidebar }) => {
         </div>
         <h2>MNG</h2>
         <div className="sidebar_link">
-          <i className="fa fa-user-secret"></i>
-          <Link to="/add-category">Add category</Link>
+          <Link to="#">
+            <i className="fa fa-user-secret"></i>
+
+            <Dropdown isOpen={categoryDropdownOpen} toggle={toggle}>
+              <DropdownToggle caret> Category</DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>
+                  <Link to="/add-category">Add category</Link>{" "}
+                </DropdownItem>
+                <DropdownItem>Update category</DropdownItem>
+                <DropdownItem>Delete category</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </Link>
         </div>
         <div className="sidebar_link">
           <i className="fa fa-building-o"></i>
@@ -27,7 +48,17 @@ const SideBar = ({ sidebarOpen, openSidebar, closeSidebar }) => {
         </div>
         <div className="sidebar_link">
           <i className="fa fa-archive"></i>
-          <Link to="#">Waerhouse</Link>
+          <Link to="#">
+            <Dropdown>
+              <DropdownToggle caret></DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>Profile</DropdownItem>
+                <DropdownItem>Ordered Item</DropdownItem>
+                <DropdownItem>Member Ship Package</DropdownItem>
+                <DropdownItem> Logout</DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </Link>
         </div>
         <div className="sidebar_link">
           <i className="fa fa-wrench"></i>
