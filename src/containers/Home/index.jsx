@@ -10,7 +10,7 @@ import {
   Collapse,
   IconButton,
 } from "@material-ui/core";
-import Carusel from "../Carusel";
+// import Carusel from "../Carusel";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link, useHistory } from "react-router-dom";
@@ -20,6 +20,8 @@ import axios from "axios";
 import Loading from "../../components/loader";
 import { BASE_URL } from "../../static";
 import Alert from "@material-ui/lab/Alert";
+import Slider from "../Slider";
+
 const useStyles = makeStyles({
   root: {
     height: "100%",
@@ -97,6 +99,8 @@ const Product = () => {
         </div>
       ) : (
         <Container>
+          <Slider/>
+          {/* <Slide/> */}
           <Collapse in={open}>
             <Alert
               severity="success"
@@ -153,7 +157,7 @@ const Product = () => {
                                 {product.description}
                               </p>
                             </div>
-                            <div class="px-6 pt-4 pb-2">
+                            <div class="px-6 pt-4 pb-2 mr-2">
                               <span style={{color:"rebeccapurple"}} class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-yellow-700 mr-2 mb-2">
                                 ${product.price}
                               </span>
@@ -179,7 +183,8 @@ const Product = () => {
                                       r="1.5"
                                     ></circle>
                                   </svg>
-                                  <small>Add To Cart</small>
+                                  Add  
+                              
                                   
                                 </Link>
                                 

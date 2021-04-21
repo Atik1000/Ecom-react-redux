@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Toolbar, Container, Grid, MenuItem,Menu } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import {storeAllCategory} from '../../store/action/categoryAction';
 import {addSessionData} from '../../store/action/sessionAction';
 import {
@@ -136,6 +135,12 @@ const Navigation = () => {
                 <MenuItem onClick={() => routePage("/login")}> Log In</MenuItem>
               )}
             </Grid>
+              <Grid item>
+             {session.role==="admin" && session.expire_at>new Date().valueOf() &&<MenuItem onClick={() => routePage("/dashboard")}> Dashboard</MenuItem>} 
+            </Grid>
+            {/* <Grid item>
+             {session.token && session.expire_at>new Date().valueOf()?<MenuItem onClick={logOut}> Logout</MenuItem>:<MenuItem onClick={() => routePage("/login")}> Log In</MenuItem>} 
+            </Grid> */}
             <Grid item>
               <MenuItem onClick={() => routePage("/admin")}>admin</MenuItem>
             </Grid>
