@@ -100,7 +100,7 @@ const ProductUpdate = () => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <Collapse in={notification.display}>
-        <Alert severity="error"
+        <Alert severity="success"
           action={
             <IconButton
               aria-label="close"

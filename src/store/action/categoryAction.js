@@ -3,7 +3,7 @@ import { BASE_URL } from '../../static';
 import {ActionTypes} from '../types'
 
 
-export const storeAllCategory=()=>async(dispatch,getStore)=>{
+export  const storeAllCategory=()=>async(dispatch,getStore)=>{
     let {data}=await axios.get(BASE_URL+'/category')
     dispatch(storeCategory(data))
 }

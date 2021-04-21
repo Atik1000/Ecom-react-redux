@@ -12,6 +12,8 @@ import { useState } from "react";
 const SideBar = ({ sidebarOpen, openSidebar, closeSidebar }) => {
   const [categoryDropdownOpen, setCategoryDropdownOpen] = useState(false);
   const toggle = () => setCategoryDropdownOpen((prevState) => !prevState);
+  const [productDropdownOpen, setProductDropdownOpen] = useState(false);
+  const togglep = () => setProductDropdownOpen((prevState) => !prevState);
   return (
     <div className={sidebarOpen ? "sidebar-responsive" : ""} id="sidebar">
       <div className="sidebar-title">
@@ -28,36 +30,45 @@ const SideBar = ({ sidebarOpen, openSidebar, closeSidebar }) => {
         <h2>MNG</h2>
         <div className="sidebar_link">
           <Link to="#">
-            <i className="fa fa-user-secret"></i>
+     
 
             <Dropdown isOpen={categoryDropdownOpen} toggle={toggle}>
               <DropdownToggle caret> Category</DropdownToggle>
               <DropdownMenu>
                 <DropdownItem>
-                  <Link to="/add-category">Add category</Link>{" "}
+                  <Link to="/add-category">Add category</Link>
                 </DropdownItem>
-                <DropdownItem>Update category</DropdownItem>
-                <DropdownItem>Delete category</DropdownItem>
+                <DropdownItem>
+                <Link to="/update-category">Update category</Link>
+                  </DropdownItem>
+                <DropdownItem>
+                  <Link to='/delete-category'>Delete category</Link>
+                  </DropdownItem>
               </DropdownMenu>
             </Dropdown>
           </Link>
         </div>
         <div className="sidebar_link">
-          <i className="fa fa-building-o"></i>
-          <Link to="/add-product">Add Product</Link>
+
+          <Link to="#"><Dropdown isOpen={productDropdownOpen} toggle={togglep}>
+              <DropdownToggle caret> Product</DropdownToggle>
+              <DropdownMenu>
+                <DropdownItem>
+                  <Link to="/add-product">Add product</Link>
+                </DropdownItem>
+                <DropdownItem>
+                <Link to="/update-product">Update product</Link>
+                  </DropdownItem>
+                <DropdownItem>
+                  <Link to='/delete-product'>Delete product</Link>
+                  </DropdownItem>
+              </DropdownMenu>
+            </Dropdown></Link>
         </div>
         <div className="sidebar_link">
           <i className="fa fa-archive"></i>
           <Link to="#">
-            <Dropdown>
-              <DropdownToggle caret></DropdownToggle>
-              <DropdownMenu>
-                <DropdownItem>Profile</DropdownItem>
-                <DropdownItem>Ordered Item</DropdownItem>
-                <DropdownItem>Member Ship Package</DropdownItem>
-                <DropdownItem> Logout</DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+          
           </Link>
         </div>
         <div className="sidebar_link">

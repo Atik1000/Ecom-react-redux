@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Toolbar, Container, Grid, MenuItem } from "@material-ui/core";
+import { Toolbar, Container, Grid, MenuItem,Menu } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-
+import {storeAllCategory} from '../../store/action/categoryAction';
+import {addSessionData} from '../../store/action/sessionAction';
 import {
   Dropdown,
   DropdownToggle,
@@ -11,10 +12,18 @@ import {
   DropdownItem,
 } from "reactstrap";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+
 const Navigation = () => {
+  let dispatch=useDispatch()
   const { count } = useSelector((state) => state.cartStore);
+  const session=useSelector((state)=>state.sessionStore)
+  const categories=useSelector((state)=>state.categoryStore)
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+  useEffect(()=>{
+    dispatch(storeAllCategory())
+  },[])
 
   const history = useHistory();
   const routePage = (url) => {
@@ -29,11 +38,25 @@ const Navigation = () => {
       setLogin(false);
     }
   }, []);
+  let closeMenu=()=>{
+    setMenuOpen(false);
+  }
+  let routePage2 = (url) => {
+    history.push(url)
+    setMenuOpen(false);
+}
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState()
 
-  const logOut = () => {
-    sessionStorage.removeItem("jwtToken");
-    setLogin(false);
-  };
+  const recordButtonPosition = (event) => {
+      setAnchorEl(event.currentTarget);
+      setMenuOpen(true);
+  }
+  const logOut=()=>{
+    sessionStorage.removeItem('jwtToken')
+    dispatch(addSessionData({token:'',role:'',expire_at:''}))
+  
+  }
   return (
     <>
       <Container>
@@ -61,7 +84,23 @@ const Navigation = () => {
               style={{ width: "300px", borderRadius: "10px" }}
             />
           </Grid>
+          <Grid item>
+                <>
+                  <MenuItem onClick={recordButtonPosition}>
+                 
+                  </MenuItem>
+                  <Menu
+                      anchorEl={anchorEl}
+                      open={menuOpen}
+                      onClose={closeMenu} >
+                      {categories.category_list.length>0 && categories.category_list.map((category,index)=>{
+                        return <MenuItem onClick={()=>routePage2(`/products/category/${category._id}`)} key={index}> {category.name} </MenuItem>
+                      })}
 
+                  </Menu>
+                  
+              </>
+            </Grid>
           <Grid container justify="flex-end">
             <Grid item>
               <MenuItem onClick={() => routePage("/cart")}>

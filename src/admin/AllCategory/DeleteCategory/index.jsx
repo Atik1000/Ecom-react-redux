@@ -10,7 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import {useSelector,useDispatch} from 'react-redux';
- import {deleteCateogry} from '../../../store/action/categoryAction';
+import {deleteCateogry} from '../../../store/action/categoryAction';
 import {setNotificationDisplay} from '../../../store/action/notificationAction'
 import Alert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
@@ -25,7 +25,7 @@ export default function CategoryDelete() {
   const dispatch=useDispatch();
   const {category_list}=useSelector((state)=>state.categoryStore)
   const notification=useSelector((state)=>state.notificationStore)     
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
   const [currentCategory,setCurrntCategory]=useState('')
 
   const handleClickOpen = (category_id) => {
@@ -55,7 +55,7 @@ export default function CategoryDelete() {
       <Grid container  direction="row" justify="center" alignItems="center">
           <Grid item xs={8}>
           <Collapse in={notification.display}>
-            <Alert severity="error"
+            <Alert severity="success"
             action={
                 <IconButton
                 aria-label="close"
