@@ -11,7 +11,6 @@ import {
   DropdownItem,
 } from "reactstrap";
 import AccountCircleIcon from "@material-ui/icons/AccountCircle";
-
 const Navigation = () => {
   let dispatch=useDispatch()
   const { count } = useSelector((state) => state.cartStore);
@@ -20,6 +19,7 @@ const Navigation = () => {
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const toggle = () => setDropdownOpen((prevState) => !prevState);
+
   useEffect(()=>{
     dispatch(storeAllCategory())
   },[])
@@ -118,7 +118,7 @@ const Navigation = () => {
                 <span style={{ color: "black" }}>{count}</span>
               </MenuItem>
             </Grid>
-            <Grid item>
+            {/* <Grid item>
               {login ? (
                 <Dropdown isOpen={dropdownOpen} toggle={toggle}>
                   <DropdownToggle caret>
@@ -133,17 +133,19 @@ const Navigation = () => {
                 </Dropdown>
               ) : (
                 <MenuItem onClick={() => routePage("/login")}> Log In</MenuItem>
-              )}
-            </Grid>
-              <Grid item>
-             {session.role==="admin" && session.expire_at>new Date().valueOf() &&<MenuItem onClick={() => routePage("/dashboard")}> Dashboard</MenuItem>} 
-            </Grid>
-            {/* <Grid item>
-             {session.token && session.expire_at>new Date().valueOf()?<MenuItem onClick={logOut}> Logout</MenuItem>:<MenuItem onClick={() => routePage("/login")}> Log In</MenuItem>} 
+              )} 
             </Grid> */}
-            <Grid item>
+            <Grid>
+          {  session.token && session.expire_at>new Date().valueOf()?<MenuItem onClick={logOut}> Logout</MenuItem>:<MenuItem onClick={() => routePage("/login")}> Log In</MenuItem>} 
+            </Grid>  
+            
+             <Grid item>
+             {session.role=="admin" && session.expire_at>new Date().valueOf() &&<MenuItem onClick={() => routePage("/admin")}> Dashboard</MenuItem>} 
+            </Grid>*
+           
+             {/* <Grid item>
               <MenuItem onClick={() => routePage("/admin")}>admin</MenuItem>
-            </Grid>
+            </Grid>  */}
           </Grid>
         </Toolbar>
       </Container>
