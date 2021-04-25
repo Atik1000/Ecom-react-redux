@@ -4,9 +4,9 @@ import Navigation from '../navigation'
 
 const Header=()=>{
     return (
-        <AppBar position="static">
+        <>
             <Navigation />
-        </AppBar>
+        </>
         
     )
 }

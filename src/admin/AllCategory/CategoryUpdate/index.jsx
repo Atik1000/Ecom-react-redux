@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
-
+import {Link } from "react-router-dom"
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import {useSelector,useDispatch} from 'react-redux'
 import { updateCategory } from "../../../store/action/categoryAction";
@@ -96,6 +96,7 @@ const CategoryUpdateForm = () => {
   },[])
   return (
     <Container component="main" maxWidth="xs">
+      <Button><Link to='/admin'>Go Back</Link></Button>
       <CssBaseline />
       <Collapse in={notification.display}>
         <Alert severity="error"

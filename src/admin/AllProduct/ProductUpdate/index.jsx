@@ -10,12 +10,11 @@ import {
 } from "@material-ui/core";
 import Alert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
-// import {updateProduct} from '../../store/action/productAction'
+import {Link} from "react-router-dom"
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import {useSelector,useDispatch} from 'react-redux'
 import { updateProduct } from "../../../store/action/productAction";
 import { setNotificationDisplay } from "../../../store/action/notificationAction";
-// import {setNotificationDisplay} from '../../../store/action/notificationAction'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -98,6 +97,7 @@ const ProductUpdate = () => {
   },[])
   return (
     <Container component="main" maxWidth="xs">
+      <Button><Link to='/admin'>Go Back</Link></Button>
       <CssBaseline />
       <Collapse in={notification.display}>
         <Alert severity="success"

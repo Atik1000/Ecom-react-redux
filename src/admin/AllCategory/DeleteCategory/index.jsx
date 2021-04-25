@@ -13,7 +13,9 @@ import {useSelector,useDispatch} from 'react-redux';
 import {deleteCateogry} from '../../../store/action/categoryAction';
 import {setNotificationDisplay} from '../../../store/action/notificationAction'
 import Alert from '@material-ui/lab/Alert';
+import {Link} from "react-router-dom";
 import CloseIcon from '@material-ui/icons/Close';
+import { Container } from 'reactstrap';
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -50,9 +52,13 @@ export default function CategoryDelete() {
   const setDisplay=()=>{
     dispatch(setNotificationDisplay())
   }
+ 
 
   return (
+    <Container>
+     <Button><Link to='/admin'>Go Back</Link></Button>
       <Grid container  direction="row" justify="center" alignItems="center">
+        
           <Grid item xs={8}>
           <Collapse in={notification.display}>
             <Alert severity="success"
@@ -125,6 +131,7 @@ export default function CategoryDelete() {
           </Grid>
 
       </Grid>
+      </Container>
     
   );
 }

@@ -1,85 +1,131 @@
 import React from "react";
-import "./Main.scss";
+import { makeStyles } from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+import {
+  Card,
+  CardContent,
+  Typography,
+  CardActions,
+  Button,
+} from "@material-ui/core";
 
-const Main = () => {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: "center",
+    color: theme.palette.text.secondary,
+  },
+}));
+
+export default function Main() {
+  const classes = useStyles();
+
   return (
-    <main>
-      <div className="main_container">
-        <div className="main_title">
-          <div className="main_greeting">
-            <p>Welcome to your admin dashbord</p>
-          </div>
-        </div>
-        <div className="main_cards">
-          <div className="card">
-            <i className="fa fa-user-o fa-2x text-lightblue"></i>
-
-            <div className="card_inner">
-              <p className="text-btn-primary-p">Number of Users</p>
-              <span className="font-bold text-title">578</span>
-            </div>
-          </div>
-          <div className="card">
-          <i className="fa fa-list-alt fa-2x text-blue" aria-hidden="true"></i>
-            <div className="card_inner">
-              <p className="text-btn-primary-p">Total Category</p>
-              <span className="font-bold text-title">5728</span>
-            </div>
-          </div>
-          <div className="card">
-            <i className="fa fa-product-hunt fa-2x text-yellow"></i>
-            <div className="card_inner">
-              <p className="text-btn-primary-p">Total product</p>
-              <span className="font-bold text-title">5728</span>
-            </div>
-          </div>
-          <div className="card">
-            <i className="fa fa-thumbs-o-up fa-2x text-green"></i>
-            <div className="card_inner">
-              <p className="text-btn-primary-p">Number of subscribe</p>
-              <span className="font-bold text-title">5728</span>
-            </div>
-          </div>
-          <div className="card">
-            <i className="fa fa-thumbs-o-up fa-2x text-green"></i>
-            <div className="card_inner">
-              <p className="text-btn-primary-p">Number of subscribe</p>
-              <span className="font-bold text-title">5728</span>
-            </div>
-          </div>
-          <div className="card">
-            <i className="fa fa-thumbs-o-up fa-2x text-green"></i>
-            <div className="card_inner">
-              <p className="text-btn-primary-p">Number of subscribe</p>
-              <span className="font-bold text-title">5728</span>
-            </div>
-          </div>
-          <div className="card">
-            <i className="fa fa-thumbs-o-up fa-2x text-green"></i>
-            <div className="card_inner">
-              <p className="text-btn-primary-p">Number of subscribe</p>
-              <span className="font-bold text-title">5728</span>
-            </div>
-          </div>
-          <div className="card">
-            <i className="fa fa-thumbs-o-up fa-2x text-green"></i>
-            <div className="card_inner">
-              <p className="text-btn-primary-p">Number of subscribe</p>
-              <span className="font-bold text-title">5728</span>
-            </div>
-          </div>
-
-          <div className="card">
-            <i className="fa fa-thumbs-o-up fa-2x text-green"></i>
-            <div className="card_inner">
-              <p className="text-btn-primary-p">Number of subscribe</p>
-              <span className="font-bold text-title">5728</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
+    <div className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={3}>
+          
+            <Card className={classes.root} variant="outlined">
+              <CardContent>
+                <Typography
+                  className={classes.title}
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  Word of the Day
+                </Typography>
+                <Typography variant="h5" component="h2"></Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+                <Typography variant="body2" component="p">
+                  well meaning and kindly.
+                  <br />
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Learn More</Button>
+              </CardActions>
+            </Card>
+       
+        </Grid>
+        <Grid item xs={3}>
+        <Card className={classes.root} variant="outlined">
+              <CardContent>
+                <Typography
+                  className={classes.title}
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  Word of the Day
+                </Typography>
+                <Typography variant="h5" component="h2"></Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+                <Typography variant="body2" component="p">
+                  well meaning and kindly.
+                  <br />
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Learn More</Button>
+              </CardActions>
+            </Card>
+        </Grid>
+        <Grid item xs={3}>
+        <Card className={classes.root} variant="outlined">
+              <CardContent>
+                <Typography
+                  className={classes.title}
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  Word of the Day
+                </Typography>
+                <Typography variant="h5" component="h2"></Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+                <Typography variant="body2" component="p">
+                  well meaning and kindly.
+                  <br />
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Learn More</Button>
+              </CardActions>
+            </Card>
+        </Grid>
+        <Grid item xs={3}>
+        <Card className={classes.root} variant="outlined">
+              <CardContent>
+                <Typography
+                  className={classes.title}
+                  color="textSecondary"
+                  gutterBottom
+                >
+                  Word of the Day
+                </Typography>
+                <Typography variant="h5" component="h2"></Typography>
+                <Typography className={classes.pos} color="textSecondary">
+                  adjective
+                </Typography>
+                <Typography variant="body2" component="p">
+                  well meaning and kindly.
+                  <br />
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small">Learn More</Button>
+              </CardActions>
+            </Card>
+        </Grid>
+      </Grid>
+    </div>
   );
-};
-
-export default Main;
+}

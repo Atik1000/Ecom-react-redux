@@ -14,6 +14,8 @@ import {deleteProduct} from '../../../store/action/productAction';
 import {setNotificationDisplay} from '../../../store/action/notificationAction'
 import Alert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
+import { Container } from '@material-ui/core';
+import {Link} from "react-router-dom"
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -53,6 +55,8 @@ export default function ProductDelete() {
   }
 
   return (
+    <Container>
+      <Button><Link to='/admin'>Go Back</Link></Button>
       <Grid container  direction="row" justify="center" alignItems="center">
           <Grid item xs={8}>
           <Collapse in={notification.display}>
@@ -128,6 +132,7 @@ export default function ProductDelete() {
           </Grid>
 
       </Grid>
+      </Container>
     
   );
 }
