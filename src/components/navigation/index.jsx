@@ -164,15 +164,15 @@ const Navigation = (props) => {
   const routePage = (url) => {
     history.push(url);
   };
-  const [login, setLogin] = useState();
-  useEffect(() => {
-    let userInfo = JSON.parse(sessionStorage.getItem("jwtToken"));
-    if (userInfo) {
-      setLogin(true);
-    } else {
-      setLogin(false);
-    }
-  }, []);
+  // const [login, setLogin] = useState();
+  // useEffect(() => {
+  //   let userInfo = JSON.parse(sessionStorage.getItem("jwtToken"));
+  //   if (userInfo) {
+  //     setLogin(true);
+  //   } else {
+  //     setLogin(false);
+  //   }
+  // }, []);
   let closeMenu = () => {
     setMenuOpen(false);
   };
@@ -265,29 +265,42 @@ const Navigation = (props) => {
           <span style={{ color: "black", marginRight: "5px" }}>{count}</span>
         </NavbarText>
         <>
-          <Button
-            variant="contained"
-            style={{ border: "1px solid blue", marginRight: "20px",height:"38px" }}
-            color="default"
-          >
+          <>
             {session.token && session.expire_at > new Date().valueOf() ? (
-              <NavbarText variant="contained" color="default" onClick={logOut}>
-                SIGN OUT
+              <NavbarText >
+                <Button onClick={logOut} variant="contained" color="secondary">
+                  SIGN OUT
+                </Button>
               </NavbarText>
             ) : (
-              <NavbarText onClick={() => routePage("/login")}> SIGN IN</NavbarText>
+              <>
+                <NavbarText>
+                  <Button
+                    variant="contained"
+                    style={{
+                      border: "1px solid blue",
+                      marginRight: "20px",
+                      height: "38px",
+                    }}
+                    color="default"
+                    onClick={() => routePage("/login")}
+                  >
+                    SIGN IN
+                  </Button>
+                </NavbarText>
+                <NavbarText>
+                  <Button
+                    onClick={() => routePage("/signup")}
+                    variant="contained"
+                    color="primary"
+                  >
+                    SIGN UP
+                  </Button>
+                </NavbarText>
+              </>
             )}
-          </Button>
+          </>
         </>
-        <NavbarText>
-          <Button
-            onClick={() => routePage("/signup")}
-            variant="contained"
-            color="primary"
-          >
-            SIGN UP
-          </Button>
-        </NavbarText>
      
       </Navbar>
     </Container>
