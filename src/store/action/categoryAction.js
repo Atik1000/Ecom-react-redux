@@ -4,10 +4,12 @@ import {ActionTypes} from '../types'
 
 
 export  const storeAllCategory=()=>async(dispatch,getStore)=>{
+    // In admin pannel when we added category then store data
     let {data}=await axios.get(BASE_URL+'/category')
     dispatch(storeCategory(data))
 }
 export const addNewCateogry=(data)=>async(dispatch,getStore)=>{
+    // Here we create a new category in admin pannel 
     const {token}=getStore().sessionStore
 
 
@@ -37,6 +39,7 @@ export const addNewCateogry=(data)=>async(dispatch,getStore)=>{
 }
 
 export const deleteCateogry=(category_id)=>async(dispatch,getStore)=>{
+    // Here delete category functionality
     const {token}=getStore().sessionStore
 
 
@@ -62,6 +65,7 @@ export const deleteCateogry=(category_id)=>async(dispatch,getStore)=>{
 }
 
 export const updateCategory=(data)=>async(dispatch,getStore)=>{
+    // Here update category functionality added 
     const {token}=getStore().sessionStore
 
     axios.patch(`${BASE_URL}/category/${data.category_id}`,{
@@ -70,6 +74,7 @@ export const updateCategory=(data)=>async(dispatch,getStore)=>{
         image:data.image
     },{
         headers: {
+            // when user Authorization key baki ta value server side a
           'authorization': `bearer ${token}` 
         }
       }).then((res)=>{

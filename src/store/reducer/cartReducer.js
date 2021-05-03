@@ -1,13 +1,14 @@
+import {ActionTypes} from '../types'
 const INITIAL_STATE={
     count:0,
     productList:[]
 }
+// Here store cart data 
 
 const CartReducer=(state=INITIAL_STATE,action)=>{
     switch (action.type){
-        case 'ADD_TO_CART':
-            console.log(action.payload,'===action payload ');
-            return {...state,count:action.payload.count,productList:action.payload.productList}
+        case ActionTypes.GET_CART_INFO:
+            return {...state,count:action.payload.products.length,productList:action.payload.products}
         default:
             return state;
     }

@@ -22,6 +22,8 @@ import CategoryUpdateForm from "./admin/AllCategory/CategoryUpdate";
 import CategoryDelete from "./admin/AllCategory/DeleteCategory";
 import ProductUpdate from "./admin/AllProduct/ProductUpdate";
 import ProductDelete from "./admin/AllProduct/DeleteProduct";
+import Order from "./containers/order";
+import OrderTotal from "./admin/AllOrder";
 
 function App() {
   return (
@@ -49,6 +51,8 @@ function App() {
             path="/signup"
             exact
           />
+            <PrivateRoute exact path={"/order"} component={Order} />
+            {/* Admin panel route */}
           <PrivateRoute exact path={"/admin"} component={Admin} />
 
           <PrivateRoute component={Category} exact path={"/add-category"} />
@@ -57,6 +61,7 @@ function App() {
           <PrivateRoute component={ProductForm} exact path={"/add-product"} />
           <PrivateRoute component={ProductUpdate} exact path={"/update-product"} />
           <PrivateRoute component={ProductDelete} exact path={"/delete-product"} />
+          <PrivateRoute component={OrderTotal} exact path ={"/order-total"}/>
           <Route exact path={"/404"}>
             <NotFound />
           </Route>

@@ -39,6 +39,7 @@ export default function CategoryDelete() {
     setOpen(false);
   };
   const deleteCategory=()=>{
+    // Here we dispatch category delete 
 
     dispatch(deleteCateogry(currentCategory))
     setOpen(false);

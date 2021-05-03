@@ -2,8 +2,9 @@ import {ActionTypes} from '../types';
 import axios from 'axios';
 import {setLoader} from './loaderAction'
 import { BASE_URL } from '../../static';
-// import {Config} from '../../config'
+
 export const storeAllProduct=()=>async(dispatch,getStore)=>{
+    // Here we get all product data
     dispatch(setLoader(true));
     let {data}=await axios.get(BASE_URL+'/products')
     dispatch(storeProductList(data));
@@ -11,6 +12,7 @@ export const storeAllProduct=()=>async(dispatch,getStore)=>{
 }
 
 export const storeSingleProduct=(id)=>async(dispatch,getStore)=>{
+    // Here we get single product data 
     dispatch(setLoader(true));
     let {data}=await axios.get(`${BASE_URL}/products/${id}`)
     dispatch(storeProduct(data));
@@ -18,23 +20,26 @@ export const storeSingleProduct=(id)=>async(dispatch,getStore)=>{
 }
 
 export const storeProductByCat=(cat_id)=>async(dispatch,getStore)=>{
+    // here we get category wise product
     dispatch(setLoader(true));
     let {data}=await axios.get(BASE_URL+`/products/category/${cat_id}`)
     dispatch(storeProductForcategory(data));
     dispatch(setLoader(false));
 }
 export const addNewProduct=(data)=>async(dispatch,getStore)=>{
+    // Admin create a new data
     dispatch(setLoader(true));
 
 
     dispatch(setLoader(false));
 }
 
-export const deleteProduct=(prod_id)=>async(dispatch,getStore)=>{
+export const deleteProduct=(_id)=>async(dispatch,getStore)=>{
+    // Admin delete product data
     const {token}=getStore().sessionStore
 
 
-    axios.delete(BASE_URL+'/products/'+prod_id,{
+    axios.delete(BASE_URL+'/products/'+_id,{
         headers: {
           'authorization': `bearer ${token}` 
         }
@@ -56,6 +61,7 @@ export const deleteProduct=(prod_id)=>async(dispatch,getStore)=>{
 }
 
 export const updateProduct=(data)=>async(dispatch,getStore)=>{
+    // Adminn update product data
     const {token}=getStore().sessionStore
 
     axios.patch(`${BASE_URL}/products/${data.product_id}`,{

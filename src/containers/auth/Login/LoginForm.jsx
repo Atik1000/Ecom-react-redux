@@ -17,6 +17,7 @@ import axios  from 'axios';
 import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux'
 import {addSessionData} from '../../../store/action/sessionAction'
+import { Card } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -85,6 +86,15 @@ const LogIn = () => {
 
   return (
     <Container component="main" maxWidth="xs">
+      <Card    style={{
+
+boxShadow:
+  "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",
+paddingLeft: "50px",
+paddingRight: "50px",
+marginTop: "30px",
+paddingBottom: "30px",
+}}>
       <CssBaseline />
       <Collapse in={open}>
         <Alert severity="error"
@@ -158,9 +168,8 @@ const LogIn = () => {
           </Grid>
         </ValidatorForm>
       </div>
-      <Box mt={5}>
-
-      </Box>
+   
+      </Card>
     </Container>
   );
 };

@@ -1,5 +1,5 @@
-import React, { useReducer,useState,useEffect} from "react";
-import {BASE_URL} from "../../../static";
+import React, { useReducer, useState, useEffect } from "react";
+import { BASE_URL } from "../../../static";
 import {
   Avatar,
   CssBaseline,
@@ -9,10 +9,9 @@ import {
   Button,
   Card,
   Grid,
-  Collapse,IconButton
+
 } from "@material-ui/core";
-import Alert from '@material-ui/lab/Alert';
-import CloseIcon from '@material-ui/icons/Close';
+
 import { Link as RouteLink } from "react-router-dom";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import axios from "axios";
@@ -38,91 +37,80 @@ const useStyles = makeStyles((theme) => ({
 }));
 const SignUp = () => {
   const classes = useStyles();
-  const history=useHistory();
-  const [open, setOpen] =useState(false);
-  const [msg, setMsg] =useState('');
+  const history = useHistory();
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
     {
       firstName: "",
-      lastName: "",user_name:"",email:"",password:"",city:"",street:"",number:"",zipcode:"",phone:"",lat:"",long:""
+      lastName: "",
+      user_name: "",
+      email: "",
+      password: "",
+      city: "",
+      street: "",
+      number: "",
+      zipcode: "",
+      phone: "",
+      lat: "",
+      long: "",
     }
   );
 
-  useEffect(()=>{
-    navigator.geolocation.getCurrentPosition(function(position) {
-      setFormInput({ lat:  position.coords.latitude });
-      setFormInput({ long:  position.coords.longitude });
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function (position) {
+      setFormInput({ lat: position.coords.latitude });
+      setFormInput({ long: position.coords.longitude });
     });
-  },[])
-  const handleInput = evt => {
+  }, []);
+  const handleInput = (evt) => {
     const name = evt.target.name;
     const newValue = evt.target.value;
     setFormInput({ [name]: newValue });
   };
-  const submitForm=(evt)=>{
+  const submitForm = (evt) => {
     evt.preventDefault();
 
-    axios.post(`${BASE_URL}/signup`,{
-      email: formInput.email,
-      username: formInput.user_name,
-      password: formInput.password,
-      firstname: formInput.firstName,
-      lastname:formInput.lastName,
-      address: {
-        city: formInput.city,
-        street: formInput.street,
-        number: formInput.number,
-        zipcode: formInput.zipcode,
-        geolocation: {
-          lat:  formInput.lat,
-          long: formInput.long
-        }
-      },
-      phone:formInput.phone
-    }).then((res)=>{
-        history.push('/login')
-    }).catch((e)=>{
-      setMsg('Server error...');
-      setOpen(true);
-    })
-
-  }
+    axios
+      .post(`${BASE_URL}/signup`, {
+        email: formInput.email,
+        username: formInput.user_name,
+        password: formInput.password,
+        firstname: formInput.firstName,
+        lastname: formInput.lastName,
+        address: {
+          city: formInput.city,
+          street: formInput.street,
+          number: formInput.number,
+          zipcode: formInput.zipcode,
+          geolocation: {
+            lat: formInput.lat,
+            long: formInput.long,
+          },
+        },
+        phone: formInput.phone,
+      })
+      .then((res) => {
+        history.push("/login");
+      })
+      .catch((e) => {
+      console.log(e=="problem");
+      });
+  };
   return (
     <Container component="main" maxWidth="xs">
-
       <Card
         style={{
-
           boxShadow:
             "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",
           paddingLeft: "50px",
           paddingRight: "50px",
           marginTop: "30px",
           paddingBottom: "30px",
+         
         }}
-        
       >
         <CssBaseline />
-          {/* <Collapse in={open}>
-        <Alert severity="error"
-          action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setOpen(false);
-              }}
-            >
-              <CloseIcon fontSize="inherit" />
-            </IconButton>
-          }
-        >
-          {msg}
-        </Alert>
-      </Collapse> */}
-    
+
         <div className={classes.paper}>
           <Avatar className={classes.avatar}></Avatar>
           <Typography component="h1" variant="h5">

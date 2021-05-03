@@ -1,74 +1,55 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-import { Card, Button, Container } from "@material-ui/core";
+import {
+  Card,
+  Button,
+  Container,
+  Collapse,
+  IconButton,
+
+} from "@material-ui/core";
 import { Col, Row, CardImg, ListGroup, ListGroupItem } from "reactstrap";
-import axios from "axios";
+import CloseIcon from '@material-ui/icons/Close';
+import Alert from '@material-ui/lab/Alert';
+import { storeSingleProduct } from "../../store/action/productAction";
 import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { storeSingleProduct } from "../../store/action/productAction";
+import { addToCart } from "../../store/action/cartAction";
+import { setNotificationDisplay } from "../../store/action/notificationAction";
 import Loading from "../../components/loader";
 import { BASE_URL } from "../../static";
-const useStyles = makeStyles({
-  root: {
-    marginTop: 20,
-  },
-});
+
 
 const ProductDetail = () => {
-  const { count, productList } = useSelector((state) => state.cartStore);
   const dispatch = useDispatch();
+  const history = useHistory();
   const { selectedProduct } = useSelector((state) => state.productStore);
   const { loading } = useSelector((state) => state.loaderStore);
-  const history = useHistory();
+  const notification = useSelector((state) => state.notificationStore);
+  const session = useSelector((state) => state.sessionStore);
   const params = useParams();
-  const [open, setOpen] = useState(false);
-  const [msg, setMsg] = useState("");
+
   let { id } = params;
   useEffect(() => {
     dispatch(storeSingleProduct(id));
   }, [id]);
-
-  const addToCart = () => {
-    let user = JSON.parse(sessionStorage.getItem("jwtToken"));
-    if (!user) {
-      history.push("/login");
+  const add_product = () => {
+    // Here dispatch cart action method
+    if (session.token && session.expire_at > new Date().valueOf()) {
+      dispatch(addToCart(selectedProduct));
     } else {
-      let token = user.token;
-      dispatch({
-        type: "ADD_TO_CART",
-        payload: {
-          count: count ? count + 1 : 1,
-          productList: productList
-            ? productList.concat(selectedProduct)
-            : [...selectedProduct],
-        },
-      });
-      axios
-        .post(
-          `${BASE_URL}/cart`,
-          {
-            product: {
-              id: selectedProduct._id,
-              quantity: 1,
-            },
-          },
-          {
-            headers: {
-              authorization: `bearer ${token}`,
-            },
-          }
-        )
-        .then((res) => {
-          setMsg("Product added to cart.");
-          setOpen(true);
-        })
-        .catch((e) => {
-          setMsg(e.response.data.error);
-          setOpen(true);
-        });
+      history.push("/login");
     }
   };
+  const setDisplay = () => {
+    dispatch(setNotificationDisplay());
+  };
+  useEffect(() => {
+    return () => {
+      dispatch(setNotificationDisplay());
+    };
+  }, []);
 
   return (
     <>
@@ -78,6 +59,25 @@ const ProductDetail = () => {
         </div>
       ) : (
         <Container>
+          <Collapse in={notification.display}>
+            <Alert
+              severity="success"
+              action={
+                <IconButton
+                  aria-label="close"
+                  color="inherit"
+                  size="small"
+                  onClick={() => {
+                    setDisplay();
+                  }}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              }
+            >
+              {notification.message}
+            </Alert>
+          </Collapse>
           <Link to="/" className="btn btn-light my-3">
             Go Back
           </Link>
@@ -124,7 +124,7 @@ const ProductDetail = () => {
                 </ListGroup>
                 <ListGroupItem>
                   <Button
-                    onClick={addToCart}
+                    onClick={add_product}
                     className="btn-block"
                     variant="contained"
                     color="primary"
@@ -142,3 +142,5 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+
+

@@ -128,6 +128,30 @@ export default function SideBar() {
           </ListItem>
           <ListItem>
             <ListItemIcon>
+              <AppleIcon />
+            </ListItemIcon>
+            <FormControl className={classes.formControl}>
+              <Select
+                displayEmpty
+                className={classes.selectEmpty}
+                inputProps={{ "aria-label": "Without label" }}
+              >
+                <MenuItem onClick={() => routePage("")}>
+                  Total Order
+                  {/* <Link to="/add-product">create product</Link> */}
+                </MenuItem>
+                <MenuItem onClick={() => routePage("")}>
+                  {/* Update Product */}
+                </MenuItem>
+                <MenuItem onClick={() => routePage("")}>
+                  {/* Delete Product */}
+                </MenuItem>
+                <MenuItem>Order</MenuItem>
+              </Select>
+            </FormControl>
+          </ListItem>
+          <ListItem>
+            <ListItemIcon>
               <PersonIcon />
             </ListItemIcon>
             <FormControl className={classes.formControl}>

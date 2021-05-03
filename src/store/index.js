@@ -6,13 +6,17 @@ import sessionReducer from './reducer/sessionReducer';
 import categoryReducer from './reducer/categoryReducer';
 import notificationReducer from './reducer/notificationReducer';
 import thunk from 'redux-thunk'
+import userReducer from './reducer/userReducer';
+import orderReducer from './reducer/orderReducer';
 const mainReducer=combineReducers({
     cartStore:CartReducer,
     productStore:productReducer,
     loaderStore:loaderReducer,
     sessionStore:sessionReducer,
     categoryStore:categoryReducer,
-    notificationStore:notificationReducer
+    notificationStore:notificationReducer,
+    orderStore:orderReducer,
+    userStore:userReducer
 })
 
 const composeEnhancers=window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

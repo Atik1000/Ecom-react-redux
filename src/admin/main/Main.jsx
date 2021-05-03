@@ -28,102 +28,64 @@ export default function Main() {
     <div className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={3}>
-          
-            <Card className={classes.root} variant="outlined">
-              <CardContent>
-                <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Word of the Day
-                </Typography>
-                <Typography variant="h5" component="h2"></Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  adjective
-                </Typography>
-                <Typography variant="body2" component="p">
-                  well meaning and kindly.
-                  <br />
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
-       
+          <Card className={classes.root} variant="outlined" style={{background:"red",borderRadius:"10px"}}>
+            <CardContent>
+              <Typography
+                className={classes.title}
+                color="textSecondary"
+                gutterBottom
+                style={{color:"white",fontWeight:"bold"}}
+              >
+                Category
+              </Typography>
+            </CardContent>
+            <CardActions></CardActions>
+          </Card>
         </Grid>
         <Grid item xs={3}>
-        <Card className={classes.root} variant="outlined">
-              <CardContent>
-                <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Word of the Day
-                </Typography>
-                <Typography variant="h5" component="h2"></Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  adjective
-                </Typography>
-                <Typography variant="body2" component="p">
-                  well meaning and kindly.
-                  <br />
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
+          <Card className={classes.root} variant="outlined"  style={{background:"blue",borderRadius:"10px"}}>
+            <CardContent>
+              <Typography
+                className={classes.title}
+                color="textSecondary"
+                gutterBottom
+                style={{color:"white",fontWeight:"bold"}}
+              >
+                Product
+              </Typography>
+            </CardContent>
+            <CardActions></CardActions>
+          </Card>
         </Grid>
         <Grid item xs={3}>
-        <Card className={classes.root} variant="outlined">
-              <CardContent>
-                <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Word of the Day
-                </Typography>
-                <Typography variant="h5" component="h2"></Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  adjective
-                </Typography>
-                <Typography variant="body2" component="p">
-                  well meaning and kindly.
-                  <br />
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
+          <Card className={classes.root} variant="outlined"  style={{background:"orange",borderRadius:"10px"}}>
+            <CardContent>
+              <Typography
+                className={classes.title}
+                color="textSecondary"
+                gutterBottom
+                style={{color:"white",fontWeight:"bold"}}
+              >
+                User
+              </Typography>
+            </CardContent>
+            <CardActions></CardActions>
+          </Card>
         </Grid>
         <Grid item xs={3}>
-        <Card className={classes.root} variant="outlined">
-              <CardContent>
-                <Typography
-                  className={classes.title}
-                  color="textSecondary"
-                  gutterBottom
-                >
-                  Word of the Day
-                </Typography>
-                <Typography variant="h5" component="h2"></Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                  adjective
-                </Typography>
-                <Typography variant="body2" component="p">
-                  well meaning and kindly.
-                  <br />
-                </Typography>
-              </CardContent>
-              <CardActions>
-                <Button size="small">Learn More</Button>
-              </CardActions>
-            </Card>
+          <Card className={classes.root} variant="outlined"  style={{background:"purple",borderRadius:"10px"}}>
+            <CardContent>
+              <Typography
+                className={classes.title}
+                color="textSecondary"
+                gutterBottom
+                style={{color:"white",fontWeight:"bold"}}
+              >
+                Order
+              </Typography>
+            </CardContent>
+            <CardActions></CardActions>
+          </Card>
         </Grid>
       </Grid>
     </div>
