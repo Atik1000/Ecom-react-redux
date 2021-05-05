@@ -1,10 +1,18 @@
 import {ActionTypes} from '../types';
 
 export const addSessionData=(data)=>async(dispatch,getStore)=>{
-    // here we store all data in session storage
     dispatch(storeSession(data)) 
 }
 
+
+
+export const addSessionDatalogin=()=>async(dispatch,getStore)=>{
+    const data=JSON.parse(sessionStorage.getItem('jwtToken'));
+    if(data){
+        dispatch(storeSession(data)) 
+    }
+    
+}
 
 const storeSession=(data)=>{
     return {

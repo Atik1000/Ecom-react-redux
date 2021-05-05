@@ -1,4 +1,4 @@
-import React,{useReducer,useEffect,useState} from "react";
+import React,{useReducer,useState,useEffect} from "react";
 import {
   Avatar,
   CssBaseline,
@@ -13,12 +13,11 @@ import Alert from '@material-ui/lab/Alert';
 import CloseIcon from '@material-ui/icons/Close';
 import {Link as RouteLink} from 'react-router-dom'
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-import axios  from 'axios';
 import {useHistory} from 'react-router-dom';
 import {useDispatch} from 'react-redux'
-import {addSessionData} from '../../../store/action/sessionAction'
-import { Card } from "@material-ui/core";
-
+import {userLogin} from '../../../store/action/userAction'
+import {useSelector} from 'react-redux'
+import {setNotificationDisplay} from '../../../store/action/notificationAction'
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -39,11 +38,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 const LogIn = () => {
+  
   const dispatch=useDispatch()
   const classes = useStyles();
-  const [open, setOpen] =useState(false);
-  const [msg, setMsg] =useState('');
+  const session=useSelector((state)=>state.sessionStore)
   const history=useHistory();
+  const notification=useSelector((state)=>state.notificationStore)   
 
   const [formInput, setFormInput] = useReducer(
     (state, newState) => ({ ...state, ...newState }),
@@ -60,58 +60,41 @@ const LogIn = () => {
   const submitForm=(evt)=>{
     evt.preventDefault();
 
-    axios.post('http://127.0.0.1:8080/signin',{
-      email: formInput.email,
-      password: formInput.password,
-      
-    }).then((res)=>{
-        if(res.data.message==="Wrong Password"){
-          setMsg('Wrong Password');
-          setOpen(true);
-        }else if(res.data.userInfo){
-          sessionStorage.setItem('jwtToken',JSON.stringify(res.data.userInfo));
-          dispatch(addSessionData(res.data.userInfo))
-          history.push('/');
-        }else{
-          setMsg('User not found');
-          setOpen(true);
-        }
-        
-    }).catch((e)=>{
-      setMsg('Server error...');
-      setOpen(true);
-    })
+    dispatch(userLogin(formInput))
+    if(session.token){
+      history.push('/');
+    }
+    
 
   }
+  const setDisplay=()=>{
+    dispatch(setNotificationDisplay())
+  }
+  useEffect(()=>{
+    return(()=>{
+      dispatch(setNotificationDisplay())
+    })
+  },[])
 
   return (
     <Container component="main" maxWidth="xs">
-      <Card    style={{
-
-boxShadow:
-  "0 2px 5px 0 rgb(0 0 0 / 16%), 0 2px 10px 0 rgb(0 0 0 / 12%)",
-paddingLeft: "50px",
-paddingRight: "50px",
-marginTop: "30px",
-paddingBottom: "30px",
-}}>
       <CssBaseline />
-      <Collapse in={open}>
-        <Alert severity="error"
+      <Collapse in={notification.display}>
+        <Alert severity="success"
           action={
             <IconButton
               aria-label="close"
               color="inherit"
               size="small"
               onClick={() => {
-                setOpen(false);
+                setDisplay();
               }}
             >
               <CloseIcon fontSize="inherit" />
             </IconButton>
           }
         >
-          {msg}
+          {notification.message}
         </Alert>
       </Collapse>
       <div className={classes.paper}>
@@ -161,15 +144,16 @@ paddingBottom: "30px",
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <RouteLink to="/signup" >
+              <RouteLink to="/signup" style={{color:"white"}}>
                 Don't have an account? Sign up
               </RouteLink>
             </Grid>
           </Grid>
         </ValidatorForm>
       </div>
-   
-      </Card>
+      <Box mt={5}>
+
+      </Box>
     </Container>
   );
 };
